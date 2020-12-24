@@ -2,9 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import styled from 'styled-components/native';
 import BodyText from './src/elements/BodyText';
-import MemoList from './src/components/MemoList';
-import Appbar from './src/components/Appbar';
-import CircleButton from './src/elements/CircleButton';
+import MemoListScreen from './src/screens/MemoListScreen';
 
 export default function App() {
   return (
@@ -12,9 +10,11 @@ export default function App() {
       {/* <Text>Open up App.js to start working on your app!2</Text>
       <BodyText>Hi!</BodyText> */}
       {/* <StatusBar style="auto" /> */}
-      <Appbar />
+      {/* <Appbar />
       <MemoList />
-      <CircleButton>+</CircleButton>
+      <CircleButton>+</CircleButton> */}
+
+      <MemoListScreen />
     </Container>
   );
 }
