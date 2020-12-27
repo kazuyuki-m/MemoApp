@@ -6,7 +6,6 @@ import CircleButton from '../elements/CircleButton';
 const MemoListScreen = () => {
   return (
     <>
-      <Appbar />
       <MemoList />
       <CircleButton>+</CircleButton>
     </>
