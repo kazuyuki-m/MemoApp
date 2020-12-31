@@ -19,7 +19,7 @@ const MemoDetailScreen = () => {
             講座のアイデアです。
           </MemoContentBody>
         </MemoContent>
-        <EditButton layout color>+</EditButton>
+        <EditButton layout color name="pencil" />
       </Container>
     </>
   );

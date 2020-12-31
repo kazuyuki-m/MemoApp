@@ -1,12 +1,35 @@
 /* eslint-disable no-confusing-arrow */
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useFonts } from 'expo-font';
+import { createIconSet } from '@expo/vector-icons';
+import AppLoading from 'expo-app-loading';
 import styled, { css, keyframes } from 'styled-components/native';
+import fontAwesome from '../../assets/fonts/fa-solid-900.ttf';
 
-const CircleButton = ({ children, layout, color }) => {
+const CustomIcon = createIconSet({
+  pencil: '\uf303',
+  plus: '\uf067',
+}, 'FontAwesome');
+
+const CircleButton = ({ name, layout, color }) => {
+  // useEffect(() => {
+  // eslint-disable-next-line prefer-const
+  let [fontsLoaded] = useFonts({
+    FontAwesome: fontAwesome,
+  });
+  // }, []);
   return (
-    <Button layout={layout} color={color}>
-      <ButtonTitle color={color}>{children}</ButtonTitle>
-    </Button>
+    fontsLoaded
+      ? (
+        <Button layout={layout} color={color}>
+          <ButtonTitle color={color} name={name} />
+          {/* {children} */}
+          {/* </ButtonTitle> */}
+
+        </Button>
+      ) : (
+        <AppLoading />
+      )
   );
 };
 
@@ -38,12 +61,13 @@ const Button = styled.View`
   /* transform: rotate(135deg) translateX(-40px) translateY(-60px); */
 `;
 
-const ButtonTitle = styled.Text`
-  font-size: 32px;
+const ButtonTitle = styled(CustomIcon)`
+  font-size: 24px;
   /* line-height: 24px; */
   color: ${({ color }) => (
     color
       ? '#e31676'
       : '#fff'
   )};
+  font-family: 'FontAwesome';
 `;
