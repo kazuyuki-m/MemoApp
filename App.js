@@ -3,9 +3,11 @@ import React from 'react';
 import styled from 'styled-components/native';
 import Appbar from './src/components/Appbar';
 import BodyText from './src/elements/BodyText';
+import LoginScreen from './src/screens/LoginScreen';
 import MemoDetailScreen from './src/screens/MemoDetailScreen';
 import MemoEditScreen from './src/screens/MemoEditScreen';
 import MemoListScreen from './src/screens/MemoListScreen';
+import SignupScreen from './src/screens/SignupScreen';
 
 export default function App() {
   return (
@@ -20,7 +22,9 @@ export default function App() {
 
       {/* <MemoListScreen /> */}
       {/* <MemoDetailScreen /> */}
-      <MemoEditScreen />
+      {/* <MemoEditScreen /> */}
+      {/* <LoginScreen /> */}
+      <SignupScreen />
     </Container>
   );
 }
