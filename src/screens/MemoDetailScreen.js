@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import styled from 'styled-components/native';
 import CircleButton from '../elements/CircleButton';
 
-const MemoDetailScreen = () => {
+const MemoDetailScreen = ({ navigation }) => {
   return (
     <>
       <Container>
@@ -19,7 +19,7 @@ const MemoDetailScreen = () => {
             講座のアイデアです。
           </MemoContentBody>
         </MemoContent>
-        <EditButton layout color name="pencil" />
+        <EditButton layout color name="pencil" onPress={() => { navigation.navigate('MemoEditScreen') }} />
       </Container>
     </>
   );

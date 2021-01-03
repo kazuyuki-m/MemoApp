@@ -3,11 +3,13 @@ import Appbar from '../components/Appbar';
 import MemoList from '../components/MemoList';
 import CircleButton from '../elements/CircleButton';
 
-const MemoListScreen = () => {
+const MemoListScreen = ({
+  navigation,
+}) => {
   return (
     <>
-      <MemoList />
-      <CircleButton name="plus" />
+      <MemoList navigation={navigation} />
+      <CircleButton name="plus" onPress={() => navigation.navigate('MemoEditScreen')} />
     </>
   );
 };

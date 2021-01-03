@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components/native';
 import CircleButton from '../elements/CircleButton';
 
-const MemoEditScreen = () => {
+const MemoEditScreen = ({ navigation }) => {
   return (
     <Container>
       <MemoEditInput>
         <MemoEditInputText multiline>Hi</MemoEditInputText>
       </MemoEditInput>
-      <CircleButton name="check" />
+      <CircleButton name="check" onPress={() => { navigation.navigate('MemoDetailScreen') }} />
     </Container>
   );
 };

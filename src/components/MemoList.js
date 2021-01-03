@@ -1,35 +1,47 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableHighlight } from 'react-native';
 import styled from 'styled-components/native';
 
-const MemoList = () => {
+const MemoList = ({
+  navigation
+}) => {
   return (
     <>
       <Container>
-        <MemoListItem>
-          <MemoTitle>講座のアイテム</MemoTitle>
-          <MemoDate>2017/10/10</MemoDate>
-        </MemoListItem>
+        <TouchableHighlight onPress={() => { navigation.navigate('MemoDetailScreen'); }}>
+          <MemoListItem>
+            <MemoTitle>講座のアイテム</MemoTitle>
+            <MemoDate>2017/10/10</MemoDate>
+          </MemoListItem>
+        </TouchableHighlight>
 
-        <MemoListItem>
-          <MemoTitle>講座のアイテム</MemoTitle>
-          <MemoDate>2017/10/10</MemoDate>
-        </MemoListItem>
+        <TouchableHighlight onPress={() => { navigation.navigate('MemoDetailScreen'); }}>
+          <MemoListItem>
+            <MemoTitle>講座のアイテム</MemoTitle>
+            <MemoDate>2017/10/10</MemoDate>
+          </MemoListItem>
+        </TouchableHighlight>
 
-        <MemoListItem>
-          <MemoTitle>講座のアイテム</MemoTitle>
-          <MemoDate>2017/10/10</MemoDate>
-        </MemoListItem>
+        <TouchableHighlight onPress={() => { navigation.navigate('MemoEditScreen'); }}>
+          <MemoListItem>
+            <MemoTitle>講座のアイテム</MemoTitle>
+            <MemoDate>2017/10/10</MemoDate>
+          </MemoListItem>
+        </TouchableHighlight>
 
-        <MemoListItem>
-          <MemoTitle>講座のアイテム</MemoTitle>
-          <MemoDate>2017/10/10</MemoDate>
-        </MemoListItem>
+        <TouchableHighlight onPress={() => { navigation.navigate('LoginScreen'); }}>
+          <MemoListItem>
+            <MemoTitle>講座のアイテム</MemoTitle>
+            <MemoDate>2017/10/10</MemoDate>
+          </MemoListItem>
+        </TouchableHighlight>
 
-        <MemoListItem>
-          <MemoTitle>講座のアイテム</MemoTitle>
-          <MemoDate>2017/10/10</MemoDate>
-        </MemoListItem>
+        <TouchableHighlight onPress={() => { navigation.navigate('SignupScreen'); }}>
+          <MemoListItem>
+            <MemoTitle>講座のアイテム</MemoTitle>
+            <MemoDate>2017/10/10</MemoDate>
+          </MemoListItem>
+        </TouchableHighlight>
       </Container>
     </>
   );
@@ -38,7 +50,7 @@ const MemoList = () => {
 export default MemoList;
 
 const Container = styled.View`
-  /* background-color: #eee; */
+  background-color: #fffdf6;
   width: 100%;
   flex: 1;
 `;

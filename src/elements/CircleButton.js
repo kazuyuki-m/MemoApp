@@ -12,7 +12,12 @@ const CustomIcon = createIconSet({
   check: '\uf00c',
 }, 'FontAwesome');
 
-const CircleButton = ({ name, layout, color }) => {
+const CircleButton = ({
+  name,
+  layout,
+  color,
+  onPress,
+}) => {
   // useEffect(() => {
   // eslint-disable-next-line prefer-const
   let [fontsLoaded] = useFonts({
@@ -22,7 +27,7 @@ const CircleButton = ({ name, layout, color }) => {
   return (
     fontsLoaded
       ? (
-        <Button layout={layout} color={color}>
+        <Button onPress={onPress} layout={layout} color={color}>
           <ButtonTitle color={color} name={name} />
           {/* {children} */}
           {/* </ButtonTitle> */}
@@ -36,7 +41,9 @@ const CircleButton = ({ name, layout, color }) => {
 
 export default CircleButton;
 
-const Button = styled.View`
+const Button = styled.TouchableHighlight.attrs(() => ({
+  underlayColor: 'transparent'
+}))`
   position: absolute;
   ${({ layout }) => (
     layout
