@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 import Appbar from './src/components/Appbar';
 import BodyText from './src/elements/BodyText';
 import MemoDetailScreen from './src/screens/MemoDetailScreen';
+import MemoEditScreen from './src/screens/MemoEditScreen';
 import MemoListScreen from './src/screens/MemoListScreen';
 
 export default function App() {
@@ -18,7 +19,8 @@ export default function App() {
       <CircleButton>+</CircleButton> */}
 
       {/* <MemoListScreen /> */}
-      <MemoDetailScreen />
+      {/* <MemoDetailScreen /> */}
+      <MemoEditScreen />
     </Container>
   );
 }
