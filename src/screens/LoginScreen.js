@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TouchableHighlight, Text, Alert } from 'react-native';
 import styled from 'styled-components';
 import firebase from 'firebase';
@@ -6,6 +6,24 @@ import firebase from 'firebase';
 const LogInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  useEffect(() => {
+    console.log('useEffect!');
+    return () => {
+      console.log('Unmount!');
+    }
+  }, []);
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'MemoListScreen' }]
+        });
+      }
+    });
+    return unsubscribe;
+  }, []);
+
   const handlePress = () => {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(userCredential => {

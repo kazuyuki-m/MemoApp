@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, TouchableHighlight, TouchableOpacity, Alert } from 'react-native';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
@@ -6,6 +6,7 @@ import { useFonts } from 'expo-font';
 import { createIconSet } from '@expo/vector-icons';
 import AppLoading from 'expo-app-loading';
 import fontAwesome from '../../assets/fonts/fa-solid-900.ttf';
+import LogOutButton from './LogOutButton';
 
 const Icon = createIconSet({
   delete: '\uf1f8',
@@ -26,6 +27,11 @@ const RightIcon = ({ fontsLoaded }) => {
 
 const MemoList = () => {
   const navigation = useNavigation();
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => <LogOutButton />,
+    });
+  }, []);
   let [fontsLoaded] = useFonts({
     FontAwesome: fontAwesome,
   });
