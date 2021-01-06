@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TouchableHighlight, Text } from 'react-native';
 import styled from 'styled-components';
 
 const LogInScreen = ({ navigation }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   return (
     <Container>
       <Title>ログイン</Title>
-      <Line value="Email Address" />
-      <Line value="Password" />
+      <Line
+        value={email}
+        onChangeText={(text) => setEmail(text)}
+        autoCapitalize="none"
+        keyboardType="email-address"
+        placeholder="Email Address"
+        textContentType="emailAddress"
+      />
+      <Line
+        value={password}
+        onChangeText={text => setPassword(text)}
+        autoCapitalize="none"
+        keyboardType="email-address"
+        placeholder="Password"
+        textContentType="password"
+      />
       <SubmitButton onPress={() => {
         navigation.reset({
           index: 0,

@@ -1,6 +1,6 @@
 /* eslint-disable no-confusing-arrow */
 import React, { useEffect } from 'react';
-import { useFonts } from 'expo-font';
+import { useFonts } from '@use-expo/font';
 import { createIconSet } from '@expo/vector-icons';
 import AppLoading from 'expo-app-loading';
 import styled, { css, keyframes } from 'styled-components/native';

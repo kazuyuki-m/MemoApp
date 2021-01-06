@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Alert } from 'react-native';
 import styled from 'styled-components';
 
 const SignUpScreen = ({ navigation }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   return (
     <Container>
       <Title>
         メンバー募集
       </Title>
-      <Input value="Email Address" />
-      <Input value="Password" />
+      <Input
+        value={email}
+        onChangeText={(text) => setEmail(text)}
+        autoCapitalize="none"
+        keyboardType="email-address"
+        placeholder="Email Address"
+      />
+      <Input
+        value={password}
+        onChangeText={(text) => setPassword(text)}
+        autoCapitalize="none"
+        placeholder="Password"
+        secureTextEntry
+      />
       <Button onPress={() => {
         navigation.reset({
           index: 0,
@@ -19,14 +33,14 @@ const SignUpScreen = ({ navigation }) => {
         <ButtonTitle>送信する</ButtonTitle>
       </Button>
       <Footer>
-        <FooterText>Not registered?</FooterText>
+        <FooterText>Already registerd?</FooterText>
         <FooterTouchableOpacity onPress={() => {
           navigation.reset({
             index: 0,
             routes: [{ name: 'LogInScreen' }]
           });
         }}>
-          <FooterLink>Sign up here!</FooterLink>
+          <FooterLink>Log In</FooterLink>
         </FooterTouchableOpacity>
       </Footer>
     </Container >
