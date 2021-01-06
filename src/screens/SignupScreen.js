@@ -1,7 +1,8 @@
 import React from 'react';
+import { Alert } from 'react-native';
 import styled from 'styled-components';
 
-const SignupScreen = () => {
+const SignUpScreen = ({ navigation }) => {
   return (
     <Container>
       <Title>
@@ -9,10 +10,26 @@ const SignupScreen = () => {
       </Title>
       <Input value="Email Address" />
       <Input value="Password" />
-      <Button onPress={() => { }}>
+      <Button onPress={() => {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'MemoListScreen' }],
+        })
+      }}>
         <ButtonTitle>送信する</ButtonTitle>
       </Button>
-    </Container>
+      <Footer>
+        <FooterText>Not registered?</FooterText>
+        <FooterTouchableOpacity onPress={() => {
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'LogInScreen' }]
+          });
+        }}>
+          <FooterLink>Sign up here!</FooterLink>
+        </FooterTouchableOpacity>
+      </Footer>
+    </Container >
   );
 };
 
@@ -55,4 +72,16 @@ const ButtonTitle = styled.Text`
   font-size: 18;
 `;
 
-export default SignupScreen;
+const Footer = styled.View`
+`;
+
+const FooterText = styled.Text`
+`;
+
+const FooterTouchableOpacity = styled.TouchableOpacity`
+`;
+
+const FooterLink = styled.Text`
+`;
+
+export default SignUpScreen;

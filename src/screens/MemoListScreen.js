@@ -8,7 +8,7 @@ const MemoListScreen = ({
 }) => {
   return (
     <>
-      <MemoList navigation={navigation} />
+      <MemoList />
       <CircleButton name="plus" onPress={() => navigation.navigate('MemoEditScreen')} />
     </>
   );

@@ -2,54 +2,72 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import styled from 'styled-components/native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 
 import Appbar from './src/components/Appbar';
 import BodyText from './src/elements/BodyText';
-import LoginScreen from './src/screens/LoginScreen';
+import LogInScreen from './src/screens/LogInScreen';
 import MemoDetailScreen from './src/screens/MemoDetailScreen';
 import MemoEditScreen from './src/screens/MemoEditScreen';
 import MemoListScreen from './src/screens/MemoListScreen';
-import SignupScreen from './src/screens/SignupScreen';
+import SignUpScreen from './src/screens/SignUpScreen';
 
 export default function App() {
   const Stack = createStackNavigator();
-  const options = {
+  const _options = {
     title: 'Memot',
     headerStyle: {
       backgroundColor: '#265366',
     },
-    // headerTintColor: '#fff',
+    headerTintColor: '#fff',
     headerTitleStyle: {
       color: '#fff',
       fontWeight: 'bold',
     },
+    headerBackTitleVisible: false,
+  };
+  const options={
+    cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
   };
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator
+        initialRouteName="SignUpScreen"
+        screenOptions={{
+          headerStyle: { backgroundColor: '#467FD3' },
+          headerTitleStyle: { color: '#ffffff' },
+          headerTitle: 'Memo App',
+          headerTintColor: '#ffffff',
+          headerBackTitle: 'Back',
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          gestureEnabled: true,
+          gestureDirection: 'horizontal',
+        }}
+      >
         <Stack.Screen
           name="MemoDetailScreen"
           component={MemoDetailScreen}
-          options={options}
+        // options={options}
         />
         <Stack.Screen
           name="MemoEditScreen"
           component={MemoEditScreen}
-          options={options}
+        // options={options}
         />
         <Stack.Screen
-          name="Home"
+          name="MemoListScreen"
           component={MemoListScreen}
+        // options={options}
+        />
+        <Stack.Screen
+          name="LogInScreen"
+          component={LogInScreen}
           options={options}
         />
         <Stack.Screen
-          name="LoginScreen"
-          component={LoginScreen}
-        />
-        <Stack.Screen
-          name="SignupScreen"
-          component={SignupScreen}
+          name="SignUpScreen"
+          component={SignUpScreen}
+          options={options}
         />
       </Stack.Navigator>
     </NavigationContainer>
@@ -66,8 +84,8 @@ export default function App() {
     //   {/* <MemoListScreen /> */}
     //   {/* <MemoDetailScreen /> */}
     //   {/* <MemoEditScreen /> */}
-    //   {/* <LoginScreen /> */}
-    //   <SignupScreen />
+    //   {/* <LogInScreen /> */}
+    //   <SignUpScreen />
     // </Container>
   );
 }

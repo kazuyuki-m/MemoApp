@@ -2,19 +2,37 @@ import React from 'react';
 import { TouchableHighlight, Text } from 'react-native';
 import styled from 'styled-components';
 
-const LoginScreen = () => {
+const LogInScreen = ({ navigation }) => {
   return (
     <Container>
       <Title>ログイン</Title>
       <Line value="Email Address" />
       <Line value="Password" />
-      <SubmitButton onPress={() => { }}><ButtonTitle>ログインする</ButtonTitle></SubmitButton>
+      <SubmitButton onPress={() => {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'MemoListScreen' }]
+        });
+      }}>
+        <ButtonTitle>ログインする</ButtonTitle>
+      </SubmitButton>
       {/* <TouchableHighlight>送信</TouchableHighlight> */}
+      <Footer>
+        <FooterText>Not registered?</FooterText>
+        <FooterTouchableOpacity onPress={() => {
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'SignUpScreen' }]
+          });
+        }}>
+          <FooterLink>Sign up here!</FooterLink>
+        </FooterTouchableOpacity>
+      </Footer>
     </Container>
   );
 };
 
-export default LoginScreen;
+export default LogInScreen;
 
 const Container = styled.View`
   flex: 1;
@@ -51,4 +69,16 @@ const SubmitButton = styled.TouchableHighlight`
 const ButtonTitle = styled.Text`
   color: #fff;
   font-size: 18;
+`;
+
+const Footer = styled.View`
+`;
+
+const FooterText = styled.Text`
+`;
+
+const FooterTouchableOpacity = styled.TouchableOpacity`
+`;
+
+const FooterLink = styled.Text`
 `;

@@ -8,7 +8,7 @@ const MemoEditScreen = ({ navigation }) => {
       <MemoEditInput>
         <MemoEditInputText multiline>Hi</MemoEditInputText>
       </MemoEditInput>
-      <CircleButton name="check" onPress={() => { navigation.navigate('MemoDetailScreen') }} />
+      <CircleButton name="check" onPress={() => { navigation.goBack() }} />
     </Container>
   );
 };

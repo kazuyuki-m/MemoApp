@@ -28,11 +28,19 @@
         "space-before-function-paren": 0,
         "func-names": 0,
         "arrow-body-style": 0,
-        "react/prop-types": 0,
+        "react/prop-types": [
+            "error",
+            {
+                "ignore": [
+                    "navigation"
+                ]
+            }
+        ],
         "react/self-closing-comp": 0,
         "no-unused-vars": 0,
         "comma-dangle": 0,
-        "semi": 0
+        "semi": 0,
+        "react/jsx-closing-bracket-location": 0,
     },
     "parser": "babel-eslint"
 }
