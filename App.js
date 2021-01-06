@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { NavigationContainer } from '@react-navigation/native';
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
+import firebase from 'firebase';
 
 import Appbar from './src/components/Appbar';
 import BodyText from './src/elements/BodyText';
@@ -11,6 +12,11 @@ import MemoDetailScreen from './src/screens/MemoDetailScreen';
 import MemoEditScreen from './src/screens/MemoEditScreen';
 import MemoListScreen from './src/screens/MemoListScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
+import { firebaseConfig } from './env';
+
+if (firebase.apps.length === 0) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -26,7 +32,7 @@ export default function App() {
     },
     headerBackTitleVisible: false,
   };
-  const options={
+  const options = {
     cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
   };
   return (

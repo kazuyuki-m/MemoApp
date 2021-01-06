@@ -1,10 +1,26 @@
 import React, { useState } from 'react';
 import { Alert } from 'react-native';
 import styled from 'styled-components';
+import firebase from 'firebase';
 
 const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const handlePress = () => {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(userCredential => {
+        const { user } = userCredential;
+        console.log(user.uid);
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'MemoListScreen' }],
+        })
+      })
+      .catch(error=>{
+        console.log(error.code, error.message);
+        Alert.alert(error.code);
+      })
+  }
   return (
     <Container>
       <Title>
@@ -16,6 +32,7 @@ const SignUpScreen = ({ navigation }) => {
         autoCapitalize="none"
         keyboardType="email-address"
         placeholder="Email Address"
+        textContentType="emailAddress"
       />
       <Input
         value={password}
@@ -23,13 +40,9 @@ const SignUpScreen = ({ navigation }) => {
         autoCapitalize="none"
         placeholder="Password"
         secureTextEntry
+        textContentType="password"
       />
-      <Button onPress={() => {
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'MemoListScreen' }],
-        })
-      }}>
+      <Button onPress={handlePress}>
         <ButtonTitle>送信する</ButtonTitle>
       </Button>
       <Footer>

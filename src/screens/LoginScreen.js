@@ -1,10 +1,26 @@
 import React, { useState } from 'react';
-import { TouchableHighlight, Text } from 'react-native';
+import { TouchableHighlight, Text, Alert } from 'react-native';
 import styled from 'styled-components';
+import firebase from 'firebase';
 
 const LogInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const handlePress = () => {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(userCredential => {
+        const { user } = userCredential;
+        console.log(user.uid);
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'MemoListScreen' }]
+        });
+      })
+      .catch(error => {
+        console.log(error.code, error.message);
+        Alert.alert(error.code);
+      })
+  }
   return (
     <Container>
       <Title>ログイン</Title>
@@ -20,16 +36,11 @@ const LogInScreen = ({ navigation }) => {
         value={password}
         onChangeText={text => setPassword(text)}
         autoCapitalize="none"
-        keyboardType="email-address"
         placeholder="Password"
+        secureTextEntry
         textContentType="password"
       />
-      <SubmitButton onPress={() => {
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'MemoListScreen' }]
-        });
-      }}>
+      <SubmitButton onPress={handlePress}>
         <ButtonTitle>ログインする</ButtonTitle>
       </SubmitButton>
       {/* <TouchableHighlight>送信</TouchableHighlight> */}
