@@ -13,6 +13,9 @@ import MemoEditScreen from './src/screens/MemoEditScreen';
 import MemoListScreen from './src/screens/MemoListScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
 import { firebaseConfig } from './env';
+import MemoCreateScreen from './src/screens/MemoCreateScreen';
+
+require('firebase/firestore');
 
 if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
@@ -54,6 +57,10 @@ export default function App() {
           name="MemoDetailScreen"
           component={MemoDetailScreen}
         // options={options}
+        />
+        <Stack.Screen
+          name="MemoCreateScreen"
+          component={MemoCreateScreen}
         />
         <Stack.Screen
           name="MemoEditScreen"
