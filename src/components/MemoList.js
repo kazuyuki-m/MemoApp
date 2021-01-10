@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, TouchableHighlight, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TouchableHighlight, TouchableOpacity, Alert, FlatList } from 'react-native';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
@@ -25,58 +25,79 @@ const RightIcon = ({ fontsLoaded }) => {
   );
 }
 
-const MemoList = () => {
+const MemoList = ({ memos }) => {
   const navigation = useNavigation();
-  useEffect(() => {
-    navigation.setOptions({
-      headerRight: () => <LogOutButton />,
-    });
-  }, []);
+
   let [fontsLoaded] = useFonts({
     FontAwesome: fontAwesome,
   });
+
+  const renderItem = ({ item: memos, index }) => {
+    return (
+      <MemoListItem
+        onPress={() => { navigation.navigate('MemoDetailScreen') }}
+        // key={index}
+      >
+        <View>
+          <MemoTitle>{memos.bodyText}</MemoTitle>
+          <MemoDate>{String(memos.updatedAt)}</MemoDate>
+        </View>
+        <RightIcon fontsLoaded={fontsLoaded} />
+      </MemoListItem>
+    );
+  }
+
   return (
-    <>
-      <Container>
-        <MemoListItem onPress={() => { navigation.navigate('MemoDetailScreen'); }}>
-          <View>
-            <MemoTitle>講座のアイテム</MemoTitle>
-            <MemoDate>2017/10/10</MemoDate>
-          </View>
-          <RightIcon fontsLoaded={fontsLoaded} />
-        </MemoListItem>
-
-        <MemoListItem onPress={() => { navigation.navigate('MemoDetailScreen'); }}>
-          <View>
-            <MemoTitle>講座のアイテム</MemoTitle>
-            <MemoDate>2017/10/10</MemoDate>
-          </View>
-        </MemoListItem>
-
-        <MemoListItem onPress={() => { navigation.navigate('MemoEditScreen'); }}>
-          <View>
-            <MemoTitle>講座のアイテム</MemoTitle>
-            <MemoDate>2017/10/10</MemoDate>
-          </View>
-        </MemoListItem>
-
-        <MemoListItem onPress={() => { navigation.navigate('LoginScreen'); }}>
-          <View>
-            <MemoTitle>講座のアイテム</MemoTitle>
-            <MemoDate>2017/10/10</MemoDate>
-          </View>
-        </MemoListItem>
-
-        <MemoListItem onPress={() => { navigation.navigate('SignUpScreen'); }}>
-          <View>
-            <MemoTitle>講座のアイテム</MemoTitle>
-            <MemoDate>2017/10/10</MemoDate>
-          </View>
-        </MemoListItem>
-      </Container>
-    </>
+    <Container>
+      <FlatList
+        data={memos}
+        renderItem={renderItem}
+        keyExtractor={item => { return item.id }}
+      />
+      {/* {memos.map((memo, index) => {
+        return (
+          <MemoListItem
+            onPress={() => { navigation.navigate('MemoDetailScreen'); }}
+            key={index}
+          >
+            <View>
+              <MemoTitle>{memo.bodyText}</MemoTitle>
+              <MemoDate>{String(memo.updatedAt)}</MemoDate>
+            </View>
+            <RightIcon fontsLoaded={fontsLoaded} />
+          </MemoListItem>
+        );
+      })} */}
+    </Container>
   );
 };
+// <MemoListItem onPress={() => { navigation.navigate('MemoDetailScreen'); }}>
+//   <View>
+//     <MemoTitle>講座のアイテム</MemoTitle>
+//     <MemoDate>2017/10/10</MemoDate>
+//   </View>
+// </MemoListItem>
+
+// <MemoListItem onPress={() => { navigation.navigate('MemoEditScreen'); }}>
+//   <View>
+//     <MemoTitle>講座のアイテム</MemoTitle>
+//     <MemoDate>2017/10/10</MemoDate>
+//   </View>
+// </MemoListItem>
+
+// <MemoListItem onPress={() => { navigation.navigate('LoginScreen'); }}>
+//   <View>
+//     <MemoTitle>講座のアイテム</MemoTitle>
+//     <MemoDate>2017/10/10</MemoDate>
+//   </View>
+// </MemoListItem>
+
+// <MemoListItem onPress={() => { navigation.navigate('SignUpScreen'); }}>
+//   <View>
+//     <MemoTitle>講座のアイテム</MemoTitle>
+//     <MemoDate>2017/10/10</MemoDate>
+//   </View>
+// </MemoListItem>
 
 export default MemoList;
 
@@ -101,7 +122,9 @@ const MemoListItem = styled.TouchableOpacity`
   background-color: #fff;
 `;
 
-const MemoTitle = styled.Text`
+const MemoTitle = styled.Text.attrs({
+  numberOfLines: 1,
+})`
   font-size: 18;
   margin-bottom: 4;
 `;
