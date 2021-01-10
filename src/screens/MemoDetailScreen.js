@@ -1,22 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import styled from 'styled-components/native';
 import CircleButton from '../elements/CircleButton';
+import firebase from 'firebase';
+import { dateToString } from '../utils';
 
-const MemoDetailScreen = ({ navigation }) => {
+const MemoDetailScreen = ({
+  navigation,
+  route: { params: { id } }
+}) => {
+  console.log(id)
+  const [memo, setMemo] = useState(null);
+
+  useEffect(() => {
+    const { currentUser } = firebase.auth();
+    let unsubscribe = () => { }
+    if (currentUser) {
+      const db = firebase.firestore();
+      const ref = db.collection(`users/${currentUser.uid}/memos`).doc(id);
+      unsubscribe = ref.onSnapshot(doc => {
+        console.log(doc.id, doc.data());
+        const data = doc.data();
+        setMemo({
+          id: data.id,
+          bodyText: data.bodyText,
+          updatedAt: data.updatedAt.toDate(),
+        });
+      });
+    }
+    return unsubscribe
+  }, [])
+
   return (
     <>
       <Container>
 
         <MemoHeader>
           <View>
-            <MemoHeaderTitle>講座のアイデア</MemoHeaderTitle>
-            <MemoHeaderDate>2017/12/12</MemoHeaderDate>
+            <MemoHeaderTitle>{memo && memo.bodyText}</MemoHeaderTitle>
+            <MemoHeaderDate>{memo && dateToString(memo.updatedAt)}</MemoHeaderDate>
           </View>
         </MemoHeader>
         <MemoContent>
           <MemoContentBody>
-            講座のアイデアです。
+            {memo && memo.bodyText}
           </MemoContentBody>
         </MemoContent>
         <EditButton layout color name="pencil" onPress={() => { navigation.navigate('MemoEditScreen') }} />
@@ -39,7 +66,9 @@ const MemoHeader = styled.View`
   padding: 10px;
 `;
 
-const MemoHeaderTitle = styled.Text`
+const MemoHeaderTitle = styled.Text.attrs({
+  numberOfLines: 1,
+})`
   font-size: 20;
   font-weight: bold;
   color: #fff;

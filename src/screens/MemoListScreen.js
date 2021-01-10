@@ -22,7 +22,7 @@ const MemoListScreen = ({
     let unsubscribe = () => { }
     if (currentUser) {
       const ref = db.collection(`users/${currentUser.uid}/memos`).orderBy('updatedAt', 'desc');
-      const unsubscribe = ref.onSnapshot(snapshot => {
+      unsubscribe = ref.onSnapshot(snapshot => {
         const userMemos = [];
         snapshot.forEach(doc => {
           console.log(doc.id, doc.data());

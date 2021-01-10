@@ -7,6 +7,7 @@ import { createIconSet } from '@expo/vector-icons';
 import AppLoading from 'expo-app-loading';
 import fontAwesome from '../../assets/fonts/fa-solid-900.ttf';
 import LogOutButton from './LogOutButton';
+import { dateToString } from '../utils';
 
 const Icon = createIconSet({
   delete: '\uf1f8',
@@ -35,12 +36,12 @@ const MemoList = ({ memos }) => {
   const renderItem = ({ item: memos, index }) => {
     return (
       <MemoListItem
-        onPress={() => { navigation.navigate('MemoDetailScreen') }}
-        // key={index}
+        onPress={() => { navigation.navigate('MemoDetailScreen', { id: memos.id }) }}
+      // key={index}
       >
         <View>
           <MemoTitle>{memos.bodyText}</MemoTitle>
-          <MemoDate>{String(memos.updatedAt)}</MemoDate>
+          <MemoDate>{dateToString(memos.updatedAt)}</MemoDate>
         </View>
         <RightIcon fontsLoaded={fontsLoaded} />
       </MemoListItem>
