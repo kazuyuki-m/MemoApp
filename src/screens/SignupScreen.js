@@ -10,14 +10,14 @@ const SignUpScreen = ({ navigation }) => {
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(userCredential => {
         const { user } = userCredential;
-        console.log(user.uid);
+        // console.log(user.uid);
         navigation.reset({
           index: 0,
           routes: [{ name: 'MemoListScreen' }],
         })
       })
       .catch(error=>{
-        console.log(error.code, error.message);
+        // console.log(error.code, error.message);
         Alert.alert(error.code);
       })
   }

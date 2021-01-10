@@ -1,14 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import CircleButton from '../elements/CircleButton';
+import firebase from 'firebase';
+import { Alert } from 'react-native';
 
-const MemoEditScreen = ({ navigation }) => {
+const MemoEditScreen = ({
+  navigation,
+  route: { params: {
+    id,
+    bodyText
+  }
+  }
+}) => {
+  // const {id, bodyText } = params
+  const [body, setBody] = useState(bodyText)
+  const handlePress = () => {
+    const { currentUser } = firebase.auth();
+    if (currentUser) {
+      const db = firebase.firestore();
+      const ref = db.collection(`users/${currentUser.uid}/memos`).doc(id);
+      ref.set({
+        bodyText: body,
+        updatedAt: new Date(),
+      }, { merge: true })
+        .then(() => {
+          navigation.goBack();
+        })
+        .catch(error => {
+          // console.log(error.code);
+          Alert.alert(error.code);
+        });
+    }
+  }
+
   return (
     <Container>
       <MemoEditInput>
-        <MemoEditInputText multiline>Hi</MemoEditInputText>
+        <MemoEditInputText
+          value={body}
+          onChangeText={text => setBody(text)}
+        />
       </MemoEditInput>
-      <CircleButton name="check" onPress={() => { navigation.goBack() }} />
+      <CircleButton name="check" onPress={handlePress} />
     </Container>
   );
 };
@@ -29,7 +62,9 @@ const MemoEditInput = styled.View`
 
 `;
 
-const MemoEditInputText = styled.TextInput`
+const MemoEditInputText = styled.TextInput.attrs({
+  multiline: true,
+})`
   font-size: 16;
 `;
 

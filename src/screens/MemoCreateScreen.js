@@ -14,11 +14,11 @@ const MemoCreateScreen = ({ navigation }) => {
       updatedAt: new Date(),
     })
       .then(docRef => {
-        console.log('Created!', docRef.id);
+        // console.log('Created!', docRef.id);
         navigation.goBack();
       })
       .catch(error => {
-        console.log('Error!', error);
+        // console.log('Error!', error);
       });
   }
   // const handleChangeText = () => {

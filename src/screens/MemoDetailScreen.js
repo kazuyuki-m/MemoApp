@@ -9,7 +9,7 @@ const MemoDetailScreen = ({
   navigation,
   route: { params: { id } }
 }) => {
-  console.log(id)
+  // console.log(id)
   const [memo, setMemo] = useState(null);
 
   useEffect(() => {
@@ -19,10 +19,11 @@ const MemoDetailScreen = ({
       const db = firebase.firestore();
       const ref = db.collection(`users/${currentUser.uid}/memos`).doc(id);
       unsubscribe = ref.onSnapshot(doc => {
-        console.log(doc.id, doc.data());
+        // console.log(doc.id, doc.data());
         const data = doc.data();
+        console.log('注目ーーー', id, '___', doc.id, '--データーーー', data.id);
         setMemo({
-          id: data.id,
+          id: doc.id,
           bodyText: data.bodyText,
           updatedAt: data.updatedAt.toDate(),
         });
@@ -46,7 +47,14 @@ const MemoDetailScreen = ({
             {memo && memo.bodyText}
           </MemoContentBody>
         </MemoContent>
-        <EditButton layout color name="pencil" onPress={() => { navigation.navigate('MemoEditScreen') }} />
+        <EditButton layout color name="pencil" onPress={() => {
+          navigation.navigate(
+            'MemoEditScreen',
+            {
+              id: memo.id,
+              bodyText: memo.bodyText,
+            })
+        }} />
       </Container>
     </>
   );

@@ -25,7 +25,7 @@ const MemoListScreen = ({
       unsubscribe = ref.onSnapshot(snapshot => {
         const userMemos = [];
         snapshot.forEach(doc => {
-          console.log(doc.id, doc.data());
+          // console.log(doc.id, doc.data());
           const data = doc.data()
           userMemos.push({
             id: doc.id,
@@ -35,13 +35,13 @@ const MemoListScreen = ({
         });
         setMemos(userMemos);
       }, error => {
-        console.log(error);
+        // console.log(error);
         Alert.alert('データの読み込みに失敗しました。');
       });
     }
     return unsubscribe;
   }, []);
-  console.log('配列データ', memos);
+  // console.log('配列データ', memos);
   return (
     <>
       <MemoList memos={memos} />

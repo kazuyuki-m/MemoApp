@@ -7,9 +7,9 @@ const LogInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   useEffect(() => {
-    console.log('useEffect!');
+    // console.log('useEffect!');
     return () => {
-      console.log('Unmount!');
+      // console.log('Unmount!');
     }
   }, []);
   useEffect(() => {
@@ -28,14 +28,14 @@ const LogInScreen = ({ navigation }) => {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(userCredential => {
         const { user } = userCredential;
-        console.log(user.uid);
+        // console.log(user.uid);
         navigation.reset({
           index: 0,
           routes: [{ name: 'MemoListScreen' }]
         });
       })
       .catch(error => {
-        console.log(error.code, error.message);
+        // console.log(error.code, error.message);
         Alert.alert(error.code);
       })
   }
