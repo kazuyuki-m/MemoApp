@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Alert } from 'react-native';
 import styled from 'styled-components';
 import firebase from 'firebase';
+import { translateErrors } from '../utils';
 
 const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -18,7 +19,8 @@ const SignUpScreen = ({ navigation }) => {
       })
       .catch(error=>{
         // console.log(error.code, error.message);
-        Alert.alert(error.code);
+        const errorMsg = translateErrors(error.code);
+        Alert.alert(errorMsg.title, errorMsg.description);
       })
   }
   return (

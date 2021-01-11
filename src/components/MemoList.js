@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { createIconSet } from '@expo/vector-icons';
 import AppLoading from 'expo-app-loading';
+import firebase from 'firebase';
 import fontAwesome from '../../assets/fonts/fa-solid-900.ttf';
 import LogOutButton from './LogOutButton';
 import { dateToString } from '../utils';
@@ -13,25 +14,52 @@ const Icon = createIconSet({
   delete: '\uf1f8',
 }, 'FontAwesome');
 
-const RightIcon = ({ fontsLoaded }) => {
-  return (
-    fontsLoaded
-      ? (
-        <Right onPress={() => { Alert.alert('Are you sure?'); }}>
-          <DeleteIcon name="delete" />
-        </Right>
-      ) : (
-        <AppLoading />
-      )
-  );
-}
-
 const MemoList = ({ memos }) => {
   const navigation = useNavigation();
 
   let [fontsLoaded] = useFonts({
     FontAwesome: fontAwesome,
   });
+
+  const deleteMemo = id => {
+    const { currentUser } = firebase.auth();
+    const db = firebase.firestore();
+    const ref = db.collection(`users/${currentUser.uid}/memos`).doc(id);
+    Alert.alert(`${id}のメモを削除します`, 'よろしいですか？', [
+      {
+        text: 'キャンセル',
+        onPress: () => { },
+      },
+      {
+        text: '削除する',
+        style: 'destructive',
+        onPress: () => {
+          ref.delete().catch(() => {
+            Alert.alert('削除に失敗しました')
+          })
+        }
+      },
+    ])
+  }
+
+  const RightIcon = ({
+    fontsLoaded,
+    id
+  }) => {
+    return (
+      fontsLoaded
+        ? (
+          <Right onPress={() => {
+            // Alert.alert('Are you sure?');
+            deleteMemo(id);
+          }}>
+            <DeleteIcon name="delete" />
+          </Right>
+        ) : (
+          <AppLoading />
+        )
+    );
+  }
 
   const renderItem = ({ item: memos, index }) => {
     return (
@@ -43,7 +71,10 @@ const MemoList = ({ memos }) => {
           <MemoTitle>{memos.bodyText}</MemoTitle>
           <MemoDate>{dateToString(memos.updatedAt)}</MemoDate>
         </View>
-        <RightIcon fontsLoaded={fontsLoaded} />
+        <RightIcon
+          fontsLoaded={fontsLoaded}
+          id={memos.id}
+        />
       </MemoListItem>
     );
   }

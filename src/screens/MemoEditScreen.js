@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import CircleButton from '../elements/CircleButton';
 import firebase from 'firebase';
 import { Alert } from 'react-native';
+import { translateErrors } from '../utils';
 
 const MemoEditScreen = ({
   navigation,
@@ -28,7 +29,8 @@ const MemoEditScreen = ({
         })
         .catch(error => {
           // console.log(error.code);
-          Alert.alert(error.code);
+          const errorMsg = translateErrors(error.code);
+          Alert.alert(errorMsg.title, errorMsg.description);
         });
     }
   }

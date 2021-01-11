@@ -3,6 +3,7 @@ import { TouchableHighlight, Text, Alert } from 'react-native';
 import styled from 'styled-components';
 import firebase from 'firebase';
 import Loading from '../components/Loading';
+import { translateErrors } from '../utils';
 
 const LogInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -40,8 +41,9 @@ const LogInScreen = ({ navigation }) => {
         });
       })
       .catch(error => {
+        const errorMsg = translateErrors(error.code);
         // console.log(error.code, error.message);
-        Alert.alert(error.code);
+        Alert.alert(errorMsg.title, errorMsg.description);
       })
       .then(()=>{
         setIsLoading(false);
