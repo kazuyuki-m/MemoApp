@@ -131,7 +131,7 @@ const MemoTitle = styled.Text.attrs({
 `;
 
 const MemoDate = styled.Text`
-  font-size: 12;
+  font-size: 12px;
   color: #a2a2a2;
 `;
 

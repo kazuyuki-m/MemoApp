@@ -21,7 +21,6 @@ const MemoDetailScreen = ({
       unsubscribe = ref.onSnapshot(doc => {
         // console.log(doc.id, doc.data());
         const data = doc.data();
-        console.log('注目ーーー', id, '___', doc.id, '--データーーー', data.id);
         setMemo({
           id: doc.id,
           bodyText: data.bodyText,
