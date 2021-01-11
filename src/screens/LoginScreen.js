@@ -22,7 +22,7 @@ const LogInScreen = ({ navigation }) => {
           index: 0,
           routes: [{ name: 'MemoListScreen' }]
         });
-      } else{
+      } else {
         setIsLoading(false);
       }
     });
@@ -45,7 +45,7 @@ const LogInScreen = ({ navigation }) => {
         // console.log(error.code, error.message);
         Alert.alert(errorMsg.title, errorMsg.description);
       })
-      .then(()=>{
+      .then(() => {
         setIsLoading(false);
       });
   }

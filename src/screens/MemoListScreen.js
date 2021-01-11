@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import firebase from 'firebase';
+import { Alert, Text } from 'react-native';
+import styled from 'styled-components';
 import Appbar from '../components/Appbar';
 import LogOutButton from '../components/LogOutButton';
 import MemoList from '../components/MemoList';
 import CircleButton from '../elements/CircleButton';
 import Button from '../components/Button';
-import firebase from 'firebase';
-import { Alert, Text } from 'react-native';
-import styled from 'styled-components';
 import Loading from '../components/Loading';
 
 const MemoListScreen = ({
@@ -27,6 +27,8 @@ const MemoListScreen = ({
     if (currentUser) {
       setIsLoading(true);
       const ref = db.collection(`users/${currentUser.uid}/memos`).orderBy('updatedAt', 'desc');
+      // eslint-disable-next-line max-len
+      // const ref = db.collection(`users/XIonPkR68BOhojRcpRak5gbkLMH2/memos`).orderBy('updatedAt', 'desc');
       unsubscribe = ref.onSnapshot(snapshot => {
         const userMemos = [];
         snapshot.forEach(doc => {
@@ -48,7 +50,6 @@ const MemoListScreen = ({
     }
     return unsubscribe;
   }, []);
-
 
   if (memos.length === 0) {
     return (

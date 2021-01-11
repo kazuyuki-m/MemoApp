@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import CircleButton from '../elements/CircleButton';
-import firebase from 'firebase';
 import { Alert } from 'react-native';
+import firebase from 'firebase';
+import CircleButton from '../elements/CircleButton';
 import { translateErrors } from '../utils';
 
 const MemoEditScreen = ({

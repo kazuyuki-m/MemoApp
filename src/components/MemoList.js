@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+// eslint-disable-next-line object-curly-newline
 import { View, Text, TouchableHighlight, TouchableOpacity, Alert, FlatList } from 'react-native';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
@@ -17,10 +18,11 @@ const Icon = createIconSet({
 const MemoList = ({ memos }) => {
   const navigation = useNavigation();
 
-  let [fontsLoaded] = useFonts({
+  const [fontsLoaded] = useFonts({
     FontAwesome: fontAwesome,
   });
 
+  // eslint-disable-next-line arrow-parens
   const deleteMemo = id => {
     const { currentUser } = firebase.auth();
     const db = firebase.firestore();
@@ -43,7 +45,7 @@ const MemoList = ({ memos }) => {
   }
 
   const RightIcon = ({
-    fontsLoaded,
+    // fontsLoaded,
     id
   }) => {
     return (
@@ -61,19 +63,19 @@ const MemoList = ({ memos }) => {
     );
   }
 
-  const renderItem = ({ item: memos, index }) => {
+  const renderItem = ({ item, index }) => {
     return (
       <MemoListItem
-        onPress={() => { navigation.navigate('MemoDetailScreen', { id: memos.id }) }}
+        onPress={() => { navigation.navigate('MemoDetailScreen', { id: item.id }) }}
       // key={index}
       >
         <View>
-          <MemoTitle>{memos.bodyText}</MemoTitle>
-          <MemoDate>{dateToString(memos.updatedAt)}</MemoDate>
+          <MemoTitle>{item.bodyText}</MemoTitle>
+          <MemoDate>{dateToString(item.updatedAt)}</MemoDate>
         </View>
         <RightIcon
-          fontsLoaded={fontsLoaded}
-          id={memos.id}
+          // fontsLoaded={fontsLoaded}
+          id={item.id}
         />
       </MemoListItem>
     );

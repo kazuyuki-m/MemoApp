@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 const Button = ({
+  // eslint-disable-next-line react/prop-types
   label,
   onPress,
   alignSelf,
-})=>{
+}) => {
   return (
     <Wrapper onPress={onPress} alignSelf={alignSelf}>
       <Label>{label}</Label>

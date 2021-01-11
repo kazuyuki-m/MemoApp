@@ -17,7 +17,7 @@ const SignUpScreen = ({ navigation }) => {
           routes: [{ name: 'MemoListScreen' }],
         })
       })
-      .catch(error=>{
+      .catch(error => {
         // console.log(error.code, error.message);
         const errorMsg = translateErrors(error.code);
         Alert.alert(errorMsg.title, errorMsg.description);
@@ -58,7 +58,7 @@ const SignUpScreen = ({ navigation }) => {
           <FooterLink>Log In</FooterLink>
         </FooterTouchableOpacity>
       </Footer>
-    </Container >
+    </Container>
   );
 };
 

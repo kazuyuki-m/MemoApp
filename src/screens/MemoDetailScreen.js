@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import styled from 'styled-components/native';
-import CircleButton from '../elements/CircleButton';
 import firebase from 'firebase';
+import CircleButton from '../elements/CircleButton';
 import { dateToString } from '../utils';
 
 const MemoDetailScreen = ({
@@ -46,14 +46,19 @@ const MemoDetailScreen = ({
             {memo && memo.bodyText}
           </MemoContentBody>
         </MemoContent>
-        <EditButton layout color name="pencil" onPress={() => {
-          navigation.navigate(
-            'MemoEditScreen',
-            {
-              id: memo.id,
-              bodyText: memo.bodyText,
-            })
-        }} />
+        <EditButton
+          layout
+          color
+          name="pencil"
+          onPress={() => {
+            navigation.navigate(
+              'MemoEditScreen',
+              {
+                id: memo.id,
+                bodyText: memo.bodyText,
+              }
+            )
+          }} />
       </Container>
     </>
   );

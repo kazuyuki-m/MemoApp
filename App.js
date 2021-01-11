@@ -23,6 +23,7 @@ if (firebase.apps.length === 0) {
 
 export default function App() {
   const Stack = createStackNavigator();
+  // eslint-disable-next-line no-underscore-dangle
   const _options = {
     title: 'Memot',
     headerStyle: {
@@ -85,21 +86,21 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
 
-    // <Container>
-    //   <Appbar />
-    //   {/* <Text>Open up App.js to start working on your app!2</Text>
-    //   <BodyText>Hi!</BodyText> */}
-    //   {/* <StatusBar style="auto" /> */}
-    //   {/* <Appbar />
-    //   <MemoList />
-    //   <CircleButton>+</CircleButton> */}
+  // <Container>
+  //   <Appbar />
+  //   {/* <Text>Open up App.js to start working on your app!2</Text>
+  //   <BodyText>Hi!</BodyText> */}
+  //   {/* <StatusBar style="auto" /> */}
+  //   {/* <Appbar />
+  //   <MemoList />
+  //   <CircleButton>+</CircleButton> */}
 
-    //   {/* <MemoListScreen /> */}
-    //   {/* <MemoDetailScreen /> */}
-    //   {/* <MemoEditScreen /> */}
-    //   {/* <LogInScreen /> */}
-    //   <SignUpScreen />
-    // </Container>
+  //   {/* <MemoListScreen /> */}
+  //   {/* <MemoDetailScreen /> */}
+  //   {/* <MemoEditScreen /> */}
+  //   {/* <LogInScreen /> */}
+  //   <SignUpScreen />
+  // </Container>
   );
 }
 

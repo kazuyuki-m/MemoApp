@@ -2,6 +2,7 @@ import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import styled from 'styled-components/native';
 
+// eslint-disable-next-line react/prop-types
 export default ({ isLoading }) => {
   if (!isLoading) return null;
   return (
