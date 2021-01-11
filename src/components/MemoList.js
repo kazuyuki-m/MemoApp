@@ -69,10 +69,10 @@ const MemoList = ({ memos }) => {
         onPress={() => { navigation.navigate('MemoDetailScreen', { id: item.id }) }}
       // key={index}
       >
-        <View>
+        <MemoInner>
           <MemoTitle>{item.bodyText}</MemoTitle>
           <MemoDate>{dateToString(item.updatedAt)}</MemoDate>
-        </View>
+        </MemoInner>
         <RightIcon
           // fontsLoaded={fontsLoaded}
           id={item.id}
@@ -94,10 +94,10 @@ const MemoList = ({ memos }) => {
             onPress={() => { navigation.navigate('MemoDetailScreen'); }}
             key={index}
           >
-            <View>
+            <MemoInner>
               <MemoTitle>{memo.bodyText}</MemoTitle>
               <MemoDate>{String(memo.updatedAt)}</MemoDate>
-            </View>
+            </MemoInner>
             <RightIcon fontsLoaded={fontsLoaded} />
           </MemoListItem>
         );
@@ -106,31 +106,31 @@ const MemoList = ({ memos }) => {
   );
 };
 // <MemoListItem onPress={() => { navigation.navigate('MemoDetailScreen'); }}>
-//   <View>
+//   <MemoInner>
 //     <MemoTitle>講座のアイテム</MemoTitle>
 //     <MemoDate>2017/10/10</MemoDate>
-//   </View>
+//   </MemoInner>
 // </MemoListItem>
 
 // <MemoListItem onPress={() => { navigation.navigate('MemoEditScreen'); }}>
-//   <View>
+//   <MemoInner>
 //     <MemoTitle>講座のアイテム</MemoTitle>
 //     <MemoDate>2017/10/10</MemoDate>
-//   </View>
+//   </MemoInner>
 // </MemoListItem>
 
 // <MemoListItem onPress={() => { navigation.navigate('LoginScreen'); }}>
-//   <View>
+//   <MemoInner>
 //     <MemoTitle>講座のアイテム</MemoTitle>
 //     <MemoDate>2017/10/10</MemoDate>
-//   </View>
+//   </MemoInner>
 // </MemoListItem>
 
 // <MemoListItem onPress={() => { navigation.navigate('SignUpScreen'); }}>
-//   <View>
+//   <MemoInner>
 //     <MemoTitle>講座のアイテム</MemoTitle>
 //     <MemoDate>2017/10/10</MemoDate>
-//   </View>
+//   </MemoInner>
 // </MemoListItem>
 
 export default MemoList;
@@ -154,6 +154,10 @@ const MemoListItem = styled.TouchableOpacity`
   border-bottom-width: 1;
   border-bottom-color: #ddd;
   background-color: #fff;
+`;
+
+const MemoInner = styled.View`
+  flex: 1;
 `;
 
 const MemoTitle = styled.Text.attrs({

@@ -57,10 +57,10 @@ const MemoEditInput = styled.View`
   background-color: #fff;
   flex: 1;
   /* justify-content: flex-start; */
-  padding-top: 32;
+  /* padding-top: 32;
   padding-left: 16;
   padding-right: 16;
-  padding-bottom: 16;
+  padding-bottom: 16; */
 
 `;
 
@@ -68,6 +68,9 @@ const MemoEditInputText = styled.TextInput.attrs({
   multiline: true,
 })`
   font-size: 16;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  padding-horizontal: 27px;
 `;
 
 export default MemoEditScreen;

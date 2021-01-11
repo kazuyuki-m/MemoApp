@@ -14,12 +14,15 @@ import MemoListScreen from './src/screens/MemoListScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
 import { firebaseConfig } from './env';
 import MemoCreateScreen from './src/screens/MemoCreateScreen';
+import { LogBox } from 'react-native';
 
 require('firebase/firestore');
 
 if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
 }
+
+LogBox.ignoreLogs(['Setting a timer'])
 
 export default function App() {
   const Stack = createStackNavigator();

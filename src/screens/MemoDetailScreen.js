@@ -41,11 +41,13 @@ const MemoDetailScreen = ({
             <MemoHeaderDate>{memo && dateToString(memo.updatedAt)}</MemoHeaderDate>
           </View>
         </MemoHeader>
-        <MemoContent>
-          <MemoContentBody>
-            {memo && memo.bodyText}
-          </MemoContentBody>
-        </MemoContent>
+        <MemoBody>
+          <MemoBodyInner>
+            <MemoText>
+              {memo && memo.bodyText}
+            </MemoText>
+          </MemoBodyInner>
+        </MemoBody>
         <EditButton
           layout
           color
@@ -81,27 +83,33 @@ const MemoHeader = styled.View`
 const MemoHeaderTitle = styled.Text.attrs({
   numberOfLines: 1,
 })`
-  font-size: 20;
+  font-size: 20px;
+  line-height: 32px;
   font-weight: bold;
   color: #fff;
-  margin-bottom: 4;
+  margin-bottom: 4px;
 `;
 
 const MemoHeaderDate = styled.Text`
-  font-size: 12;
+  font-size: 12px;
+  line-height: 16px;
   color: #fff;
 `;
 
-const MemoContent = styled.View`
-padding-top: 30;
-padding-left: 20;
-padding-right: 20;
-padding-bottom: 20;
+const MemoBody = styled.ScrollView`
 background-color: #fff;
 flex: 1;
 `;
 
-const MemoContentBody = styled.Text`
+const MemoBodyInner = styled.View`
+  padding-top: 32px;
+  padding-bottom: 80px;
+  padding-horizontal: 27px;
+`;
+
+const MemoText = styled.Text`
+  font-size: 16px;
+  line-height: 24px;
 `;
 
 const EditButton = styled(CircleButton)`
